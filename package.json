@@ -1,0 +1,11 @@
+{
+  "name": "mixpanel-amd",
+  "description": "An AMD module for running Mixpanel conflict-free",
+  "version": "0.1",
+  "authors": ["Josh Dzielak <josh@scrapp.it>"],
+  "keywords": ["amd", "mixpanel", "module", "requirejs"],
+  "main": "mixpanel.js",
+  "licenses" : [
+    { "type" : "MIT" }
+  ]
+}
