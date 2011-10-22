@@ -12,7 +12,8 @@ Simple features
 *   Debug flag to switch between actual tracking and just logging to console.log (when available).
 *   Customizeable namespace for the JSONP callback - set to something unique or guid-y
 
-Cavaets:
+Cavaets
+----------
 *   The Mixpanel JS file is BORG-ed (inlined in cube fashion). This was a necessary evil for now, as the Mixpanel library only knows to look for the mpq variable on global when injected via script tag for JSONP.
 *   The Mixpanel JS file is modified slightly near the end (see the comments). This is to allow the customizeable JSONP callback.
 *   So, if you need to take a new Mixpanel JS version in, just swap out the borg cube below and make the same modification I did. Otherwise, you may be assimilated because you didn't maintain the cube.
