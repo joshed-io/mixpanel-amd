@@ -10,7 +10,17 @@ Simple features
 -------------
 *   Use Mixpanel's JavaScript library as an AMD module
 *   Debug flag to switch between actual tracking and just logging to console.log (when available).
-*   Customizeable namespace for the JSONP callback - set to something unique or guid-y
+*   Customizeable namespace for the JSONP callback - set to something unique for your application
+
+Debugging
+---------
+If the `debug` flag is true, events will be logged as follows:
+
+![Event Debugging](http://f.cl.ly/items/1a0s2a0x2E0S0K2n2k0W/mixpanel.jpg)
+
+In production environments you don't want to have the debug flag on. However, you still might want to verify that events are being properly tracked.
+
+No problem. Just add this query parameter - `&mxp_debug=1` - to the URL you're on and you'll see events log as well as send.
 
 Cavaets
 ----------

@@ -8,29 +8,37 @@
 define(["environment"], function(environment) {
   var mixpanelToken = environment.mixpanel_token, //your mixpanel token
       ns = environment.mixpanel_namespace,  //set this to a namespace you own that can be a global (for jsonp callbacks)
-      debug = environment.debug; //if truthy, mixpanel calls wont be made, but logged to console
+      debug = environment.debug, //if truthy, mixpanel calls wont be made, but logged to console
+      debugToo = !debug && (window.location.href.search("mxp_debug") > -1);
 
   var mpq = [],
-      c,d = ["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"],
-      e = function(f) {
-        return function() {
-          mpq.push([f].concat(Array.prototype.slice.call(arguments, 0)))
-        }
-      };
-
-  if (debug) {
-    for (c = 0; c < d.length; c++) {
-      mpq[d[c]] = function() {
-        if (console.log) {
-          console.log(arguments);
-        }
+    c,d = ["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"],
+    e = function(f) {
+      return function() {
+        mpq.push([f].concat(Array.prototype.slice.call(arguments, 0)))
+      }
+    }, log = function (name, data) {
+      if (console.log) {
+        console.log(name, data);
       }
     }
-  } else {
+
+  for (c = 0; c < d.length; c++) {
+    (function(c) {
+      mpq[d[c]] = function() {
+        if (debug || debugToo) {
+          log(d[c], arguments);
+        }
+        if (!debug) {
+          e(d[c]);
+        }
+      };
+    })(c);
+  }
+
+  if(!debug) {
     mpq.push(["init", mixpanelToken]);
-    for (c = 0; c < d.length; c++) {
-      mpq[d[c]] = e(d[c])
-    }
+
     window[ns] = {
       mpq : mpq
     };
