@@ -20,7 +20,7 @@ If the `debug` flag is true, events will be logged as follows:
 
 In production environments you don't want to have the debug flag on. However, you still might want to verify that events are being properly tracked.
 
-No problem. Just add this query parameter - `&mxp_debug=1` - to the URL you're on and you'll see events log as well as send.
+No problem. Just add this query parameter - `mxp_debug=1` - to the URL you're on and you'll see events log as well as send.
 
 Cavaets
 ----------
