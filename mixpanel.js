@@ -11,29 +11,23 @@ define(["environment"], function(environment) {
       debug = environment.debug, //if truthy, mixpanel calls wont be made, but logged to console
       debugToo = !debug && (window.location.href.search("mxp_debug") > -1);
 
-  var mpq = [],
-    c,d = ["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"],
-    e = function(f) {
-      return function() {
-        mpq.push([f].concat(Array.prototype.slice.call(arguments, 0)))
-      }
-    }, log = function (name, data) {
-      if (console.log) {
-        console.log(name, data);
-      }
-    }
+  var mpq = [],c,
+    d = ["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"],
+    l = function (nm, d) {
+      console.log && console.log(nm,d);
+    };
 
   for (c = 0; c < d.length; c++) {
-    (function(c) {
-      mpq[d[c]] = function() {
+    (function(nm) {
+      mpq[nm] = function() {
         if (debug || debugToo) {
-          log(d[c], arguments);
+          l(nm, arguments);
         }
         if (!debug) {
-          e(d[c]);
+          mpq.push([nm].concat(Array.prototype.slice.call(arguments, 0)));
         }
       };
-    })(c);
+    })(d[c]);
   }
 
   if(!debug) {
