@@ -14,7 +14,9 @@ define(["environment"], function(environment) {
   var mpq = [],c,
     d = ["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"],
     l = function (nm, d) {
-      console.log && console.log(nm,d);
+      if (typeof console !== "undefined" && console.log) {
+        console.log(nm,d);
+      }
     };
 
   for (c = 0; c < d.length; c++) {
